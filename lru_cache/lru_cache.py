@@ -8,6 +8,9 @@ class LRUCache:
 
     # LEAST RECENTLY USED CACHE
 
+    # TAIL IS THE MOST RECENTLY ADDED
+    # HEAD IS THE FIRST ONE YOU ADDED
+
     """
     Our LRUCache class keeps track of the max number of nodes it
     can hold, the current number of nodes it is holding, a doubly-
@@ -18,7 +21,13 @@ class LRUCache:
 
     def __init__(self, limit=10):
 
+        os.system( 'clear' )
+
+        self.limit = limit
         self.size = 0
+        # Store key/values in here
+        self.dictionary = {}
+        # retain order of adding the key/values
         self.storage = DoublyLinkedList()
 
     """
@@ -31,56 +40,25 @@ class LRUCache:
     
     def get(self, key):
 
-        print( 'KEYYYY' , key )
+        print( '\n\n----------- Key:' , key , '\n\n' )
 
-        # if key == 'nonexistant':
-        #     return None
-        
-        if not self.storage.head:
-            pass
+        for i in range( self.size ):
 
-        else:
-        
-            head_value = self.storage.head.value
+            the_key_from_dict = self.storage.tail.value.keys()
+            the_value_from_dict = self.storage.tail.value.values()
+            the_key = list( the_key_from_dict )
+            the_value = list( the_value_from_dict )
 
-            print( f'Head Value: { head_value[0] }' )
-            print( f'Head.next Value: { self.storage.head.next.value[0] }' )
+            if the_key[0] == key:
 
-            if head_value[0] == key:
+                print( f'\nFound it' )
 
-                return head_value[1]
+                return the_value[0]
 
-            elif self.storage.head.next.value[0] == key:
-
-                return self.storage.head.next.value[1]
-
-            else:
-
-                print( 'NOOOOO' )
+            self.storage.move_to_front( self.storage.tail )
 
 
-        if not self.storage.tail:
 
-            pass
-
-        else:
-        
-            tail_value = self.storage.tail.value
-
-            print( f'Tail Value: { tail_value[0] }' )
-            print( f'Head.next Value: { self.storage.tail.prev.value[0] }' )
-
-            if tail_value[0] == key:
-
-                return tail_value[1]
-
-            elif self.storage.tail.prev.value[0] == key:
-
-                print( 'YES' , self.storage.tail.prev.value[1] )
-
-            else:
-
-                print( 'NOOOOO' )
 
         
 
@@ -97,18 +75,72 @@ class LRUCache:
 
     def set(self, key, value):
         
-        item = [ key , value ]
+        item = { key: value }
         
         if self.size == 10:
 
-            print( 'Storage is at its max of 10' )
-            pass
+            print( f'Storage is at its max of 10\n { self.storage.tail.value }\n' )
         
         else:
+            print( '\n-----------------------------' )
+            print( '\nItem:' , item )
 
-            self.storage.add_to_head( item )
-            self.size += 1
+            if self.size == 0:
+
+                self.storage.add_to_head( item )
+                self.size += 1
+                print( 'Start:' , self.storage.tail.value , ', Storage:' , self.size )
+
+            else:
+
+                if self.size == 1:
+
+                    if self.storage.tail.value == item:
+                        
+                        print( 'same item' )
+
+                    else:
+
+                        self.storage.add_to_head( item )
+                        self.size += 1
+
+                elif self.size > 1:
+
+                    print( '\n EXISTING ITEMS:\n' )
+                    for i in range( self.size ):
+
+                        # print( 'Tail:' , self.storage.tail.value , ', Storage:' , self.size )
+
+                        # Dictionary Translations
+                        the_key_from_dict = self.storage.tail.value.keys()
+                        the_value_from_dict = self.storage.tail.value.values()
+                        the_key = list( the_key_from_dict )
+                        the_value = list( the_value_from_dict )
+                        object_to_delete = self.storage.tail
+
+                        if key == the_key[0]:
+                            
+                            print( 'Duplicate Item, Different Value' )
+                            self.storage.delete( object_to_delete )
+                            self.storage.add_to_tail( item )
+                            self.storage.move_to_front( self.storage.tail )
+
+                        elif i == self.size - 1:
+                            self.storage.add_to_head( item )
+                            self.size += 1
+
+                        self.storage.move_to_front( self.storage.tail )
+
+                    print( '\n\n\n\n CHECK \n\n\n\n' )
+
+                    for i in range( self.size ):
+
+                        print( 'Tail:' , self.storage.tail.value , ', Storage:' , self.size )
+                        self.storage.move_to_front( self.storage.tail )
+
+
 
         return self.size
+
 
 

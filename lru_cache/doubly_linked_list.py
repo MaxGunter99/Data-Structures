@@ -41,7 +41,7 @@ the list's head and tail nodes."""
 
 class DoublyLinkedList:
 
-    
+
     def __init__(self, node=None):
         self.head = node
         self.tail = node
@@ -146,6 +146,8 @@ class DoublyLinkedList:
 
 
     def delete(self, node):
+
+        print( 'Deleting:' , node.value )
         
         if node is self.head:
 
