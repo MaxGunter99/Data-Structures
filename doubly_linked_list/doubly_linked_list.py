@@ -92,10 +92,6 @@ class DoublyLinkedList:
 
         print( f'Removing: { head_value }' )
 
-        # if not self.head:
-
-        #     return None
-
         head = self.head
         self.delete( head )
 
@@ -186,8 +182,6 @@ class DoublyLinkedList:
         if node is self.tail:
 
             self.tail = node.prev
-
-        # if theres a node that isnt head or tail
 
         node.delete()
         self.length -= 1
