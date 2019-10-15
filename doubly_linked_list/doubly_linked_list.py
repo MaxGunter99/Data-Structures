@@ -128,7 +128,7 @@ class DoublyLinkedList:
         if self.length > 1:
 
             tail = self.tail
-            temp = self.tai.prev
+            temp = self.tail.prev
             self.tail.delete()
             self.tail = temp
             self.length -= 1
