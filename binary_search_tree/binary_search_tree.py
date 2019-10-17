@@ -5,7 +5,9 @@ from dll_stack import Stack
 
 
 class BinarySearchTree:
+
     def __init__(self, value):
+
         self.value = value
         self.left = None
         self.right = None
@@ -91,17 +93,51 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+
+        # Questions:
+        #     1. Tests
+        #     2. Storage?
+        #     3. Valid binary tree?
+        #     4. Not sure if im accessing the binary tree from above
+
+        # queue = []
+        # queue.append( node.value )
+        print( self.value )
+        # Stack.push( self , node )
+
+        if node.right:
+            print( 'Right of' , self.value )
+            self.right.in_order_print( node.right )
+
+        if node.left:
+            print( 'Left of' , self.value )
+            self.left.in_order_print( node.left )
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
+
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
+
         pass
+
+
+
+
+
+
+
+
+
+
+
+        
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
