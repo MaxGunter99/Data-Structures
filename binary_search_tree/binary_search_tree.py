@@ -94,24 +94,17 @@ class BinarySearchTree:
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
 
-        # Questions:
-        #     1. Tests
-        #     2. Storage?
-        #     3. Valid binary tree?
-        #     4. Not sure if im accessing the binary tree from above
+        # Inorder(tree)
+        #     1. Traverse the left subtree, i.e., call Inorder(left-subtree)
+        #     2. Visit the root.
+        #     3. Traverse the right subtree, i.e., call Inorder(right-subtree)
 
-        # queue = []
-        # queue.append( node.value )
-        print( self.value )
-        # Stack.push( self , node )
 
-        if node.right:
-            print( 'Right of' , self.value )
-            self.right.in_order_print( node.right )
-
-        if node.left:
-            print( 'Left of' , self.value )
+        if self.left:
             self.left.in_order_print( node.left )
+        print( self.value )
+        if self.right:
+            self.right.in_order_print( node.right )
 
 
 
@@ -125,7 +118,56 @@ class BinarySearchTree:
     # in an iterative depth first traversal
     def dft_print(self, node):
 
-        pass
+        # print root
+        # go to smallest parents smallest node and print it ( left )
+        # print parent
+        # print parents right node
+        # go to next biggest parent
+
+        data = []
+
+        data.append( self )
+        print( self.value )
+        count = 0
+
+        answer = []
+
+
+        while count < 3:
+            for i in range( len( data ) ):
+
+                if data[ i ].right is not None:
+                    if data[ i ].right not in data:
+
+                        data.append( data[ i ].right )
+                        print( data[ i ].right.value )
+
+                        if data[ i ].right.right is not None:
+                            if data[ i ].right.right not in data:
+
+                                data.append( data[ i ].right.right )
+                                print( data[ i ].right.right.value )
+
+                        elif data[ i ].right.left is not None:
+                            if data[ i ].right.left not in data:
+
+                                data.append( data[ i ].right.left )
+                                print( data[ i ].right.left.value )
+
+                if data[ i ].left is not None:
+                    if data[ i ].left not in data:
+                        
+                        data.append( data[ i ].left )
+                        print( data[ i ].left.value )
+
+            count += 1
+
+
+
+
+
+
+
 
 
 
