@@ -112,7 +112,45 @@ class BinarySearchTree:
     # in an iterative breadth first traversal
     def bft_print(self, node):
 
-        pass
+        # print out parent
+        # print parents children
+        # print childrens children
+        # carry on
+
+        data = []
+
+        data.append( self )
+        print( self.value )
+        count = 0
+
+        answer = []
+
+
+        while count < 7:
+
+            for i in range( len( data ) ):
+
+                if data[ i ].left is not None:
+                    if data[ i ].left not in data:
+
+                        data.append( data[ i ].left )
+                        print( data[ i ].left.value )
+
+                        if data[ i ].right is not None:
+                            if data[ i ].right not in data:
+
+                                data.append( data[ i ].right )
+                                print( data[ i ].right.value )
+
+                elif data[ i ].right is not None:
+                    if data[ i ].right not in data:
+
+                        data.append( data[ i ].right )
+                        print( data[ i ].right.value )
+
+            count += 1
+            
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
@@ -156,7 +194,7 @@ class BinarySearchTree:
 
                 if data[ i ].left is not None:
                     if data[ i ].left not in data:
-                        
+
                         data.append( data[ i ].left )
                         print( data[ i ].left.value )
 
